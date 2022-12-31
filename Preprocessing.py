@@ -19,4 +19,11 @@ df_drop_outlier = data.copy()
 for col in cols:    
     df_drop_outlier = data[df_zscore[col] == False]
 print(df_drop_outlier)
-df_drop_outlier.to_csv('./after_preprocessing.csv')
+df_drop_outlier.to_csv('after_preprocessing.csv')
+from sklearn import preprocessing
+from sklearn.preprocessing import StandardScaler
+for col in cols:
+    df_col = df_drop_outlier[col]
+    z_score = (df_col - df_col.mean()) / df_col.std()
+    df_zscore[col] = z_score
+df_zscore.to_csv('./z-score.csv')
